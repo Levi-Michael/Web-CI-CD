@@ -11,7 +11,6 @@ pipeline {
                   	credentialsId: '7d09ec26-8a86-48cc-b141-5c2141548065', 
                   	url: 'https://github.com/Levi-Michael/docker-web.git'
                     )
-                    git 'https://github.com/Levi-Michael/docker-web.git'
             }
         }
         
