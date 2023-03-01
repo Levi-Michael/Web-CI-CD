@@ -8,8 +8,7 @@ pipeline {
             steps {
                     echo "Checking out from Git Repo";
 		    git(
-                  	credentialsId: '7d09ec26-8a86-48cc-b141-5c2141548065', 
-                  	url: 'https://github.com/Levi-Michael/docker-web.git'
+                  	git branch: 'main', credentialsId: '7d09ec26-8a86-48cc-b141-5c2141548065', url: 'https://github.com/Levi-Michael/docker-web.git';
                     )
             }
         }
