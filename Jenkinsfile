@@ -7,10 +7,17 @@ pipeline {
         stage('Git-Checkout') {
             steps {
                     echo "Checking out from Git Repo";
-                  	git branch: 'main', credentialsId: '7d09ec26-8a86-48cc-b141-5c2141548065', url: 'https://github.com/Levi-Michael/docker-web.git';
+		            git branch: 'main', credentialsId: '7d09ec26-8a86-48cc-b141-5c2141548065', url: 'https://github.com/Levi-Michael/docker-web.git';
             }
         }
-        
+        stage('Clean ') {
+            steps {
+                    echo "Clean old builds";
+                     /* Put in the actual Code for Executing Build.bat file from your Git Repo here */
+                    sh 'sudo docker ps -aq | xargs docker stop | xargs docker rm'
+
+            }
+        }
         stage('Build') {
             steps {
                     echo "Building the checked-out project!";
