@@ -7,7 +7,7 @@ pipeline {
         stage('Git-Checkout') {
             steps {
                     echo "Checking out from Git Repo";
-		    sh 'git clone https://github.com/Levi-Michael/docker-web.git';
+		    git branch: 'main', url: 'https://github.com/Levi-Michael/docker-web.git';
             }
         }
         stage('Clean ') {
