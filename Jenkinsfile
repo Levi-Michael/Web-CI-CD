@@ -16,7 +16,7 @@ pipeline {
         }
         steps {
                 script{
-                    docker.withRegistry("064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr", "ecr:eu-central-1:aws-credentials") {
+                    docker.withRegistry("https://064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr", "ecr:eu-central-1:aws-credentials") {
                     docker.image("${IMAGE_REPO_NAME}").push()
                     }
                     
