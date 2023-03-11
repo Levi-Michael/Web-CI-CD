@@ -10,7 +10,16 @@ pipeline {
         REPOSITORY_URI = "064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr"
     }
     stages {
-        stage('push to ecr') {
+        stage('Git-Checkout') {
+            agent {
+                label 'master'
+            }
+            steps {
+                echo "Checking out from Git Repo";
+		        git branch: 'main', url: 'https://github.com/Levi-Michael/Web-CI-CD.git';
+            }
+        }
+        stage('Build and Push') {
         agent {
             label 'master'
         }
