@@ -1,6 +1,7 @@
 pipeline {
-    agent none
-	
+    agent {
+        label 'master'
+    }
     environment {
         AWS_ACCOUNT_ID="aws-credentials"
         AWS_DEFAULT_REGION="eu-central-1"
