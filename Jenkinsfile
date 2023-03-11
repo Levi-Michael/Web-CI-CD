@@ -17,8 +17,11 @@ pipeline {
         steps {
                 script{
                     docker.withRegistry("https://064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr", "ecr:eu-central-1:aws-credentials") {
-                    app.push("${IMAGE_REPO_NAME}")
-                    app.push("${IMAGE_TAG}")
+                    // build image
+                    def customImage = docker.build("${IMAGE_REPO_NAME}:${IMAGE_TAG}")
+
+                    // push image
+                    customImage.push()
                     }
                     
                 }
