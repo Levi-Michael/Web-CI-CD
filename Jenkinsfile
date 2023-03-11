@@ -10,6 +10,16 @@ pipeline {
         REPOSITORY_URI = "064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr"
     }
     stages {
+        stage('push to ecr') {
+        steps {
+                script{
+                    docker.withRegistry('https://064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr', 'ecr:eu-central-1:aws-credentials') (
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                    )
+                }
+            }
+        }
         stage('Logging into AWS ECR') {
             steps {
                 script {
