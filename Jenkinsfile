@@ -6,7 +6,7 @@ pipeline {
         AWS_ACCOUNT_ID="aws-credentials"
         AWS_DEFAULT_REGION="eu-central-1"
         IMAGE_REPO_NAME="my-nginx"
-        IMAGE_TAG="v1"
+        IMAGE_TAG="v2"
         REPOSITORY_URI = "064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr"
     }
     stages {
@@ -49,8 +49,9 @@ pipeline {
             }
             steps {
                 echo "Deploying to Stage Environment for more tests!";
-                sh "aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 064055967665.dkr.ecr.eu-central-1.amazonaws.com"
-                sh "docker pull 064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr:${IMAGE_REPO_NAME}"
+                docker.withRegistry("https://064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr", "ecr:eu-central-1:aws-credentials") {
+                        "docker pull 064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr:${IMAGE_REPO_NAME}"
+                    }
             }
         }
         stage('run') {
