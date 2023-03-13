@@ -31,7 +31,7 @@ pipeline {
                     
                 }
             }
-        }
+        
         stage('Push') {
         agent {
             label 'master'
@@ -45,5 +45,5 @@ pipeline {
                 }
             }
         }
-
     }
+}
