@@ -59,7 +59,16 @@ pipeline {
             }
             steps {
                 echo "Running web server!";
-                sh "docker run 064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr:${IMAGE_REPO_NAME}"
+                sh "docker run -d -p 80:80 064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr:${IMAGE_REPO_NAME}"
+            }
+        }
+        stage('Cleaning master images') {
+            agent {
+                label 'master'
+            }
+            steps {
+                echo "Cleaning images...";
+                sh 'docker rmi -f $(docker images -a -q)'
             }
         }
     }
