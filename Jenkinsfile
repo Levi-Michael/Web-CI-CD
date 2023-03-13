@@ -62,6 +62,7 @@ pipeline {
             }
             steps {
                 echo "Running web server!";
+		sh 'docker rm $(docker ps -aq)'
                 sh "docker run -d -p 80:80 064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr:${IMAGE_REPO_NAME}"
             }
         }
