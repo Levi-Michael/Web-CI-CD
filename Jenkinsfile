@@ -49,9 +49,11 @@ pipeline {
             }
             steps {
                 echo "Deploying to Stage Environment for more tests!";
-                docker.withRegistry("https://064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr", "ecr:eu-central-1:aws-credentials") {
-                        "docker pull 064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr:${IMAGE_REPO_NAME}"
-                    }
+		script{
+                	docker.withRegistry("https://064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr", "ecr:eu-central-1:aws-credentials") {
+                        	"docker pull 064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr:${IMAGE_REPO_NAME}"
+                    	}
+		}
             }
         }
         stage('run') {
