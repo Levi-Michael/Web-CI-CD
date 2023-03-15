@@ -19,7 +19,7 @@ pipeline {
 		        git branch: 'main', url: 'https://github.com/Levi-Michael/Web-CI-CD.git';
             }
         }
-        stage('Build') {
+        stage('Build-Image') {
         agent {
             label 'master'
         }
@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-        stage('Push') {
+        stage('Push-To-ECR') {
         agent {
             label 'master'
         }
@@ -43,7 +43,7 @@ pipeline {
                 }
             }
         }
-		stage('Pull') {
+		stage('Pull-From-ECR') {
             agent {
                 label 'docker'
             }
@@ -56,7 +56,7 @@ pipeline {
 		}
             }
         }
-        stage('run') {
+        stage('Run-Image') {
             agent {
                 label 'docker'
             }
@@ -66,7 +66,7 @@ pipeline {
                 sh "docker run -d -p 80:80 064055967665.dkr.ecr.eu-central-1.amazonaws.com/terraformecr:${IMAGE_REPO_NAME}"
             }
         }
-        stage('Cleaning master images') {
+        stage('Cleaning-master-images') {
             agent {
                 label 'master'
             }
